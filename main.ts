@@ -164,6 +164,13 @@ radio.onReceivedNumber(function (receivedNumber) {
         }
     }
 })
+radio.onReceivedValue(function (name, value) {
+    if (input.buttonIsPressed(Button.A)) {
+        if (value > 1) {
+            music.playTone(262, music.beat(BeatFraction.Breve))
+        }
+    }
+})
 basic.forever(function () {
     if (maqueen.Ultrasonic(PingUnit.Centimeters) < 20) {
         maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, 102)
@@ -179,4 +186,5 @@ basic.forever(function () {
     }
     radio.setGroup(125)
     radio.sendNumber(maqueen.Ultrasonic(PingUnit.Centimeters))
+    radio.sendValue("name", input.temperature())
 })
